@@ -18,3 +18,12 @@ func Uuid() interface{} {
 	guid, _ := uuid.NewUUID()
 	return guid.String()
 }
+
+func Card() interface{} {
+	return map[string]string{
+		"number": gofakeit.CreditCard().Number,
+		"cvv": gofakeit.CreditCard().Cvv,
+		"type": gofakeit.CreditCard().Type,
+		"expiry": gofakeit.CreditCard().Exp,
+	}
+}

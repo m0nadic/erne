@@ -30,19 +30,27 @@ var genMap = map[string]Generator{
 	"cardcvv":   func() interface{} { return gofakeit.CreditCardCvv() },
 	"cardexp":   func() interface{} { return gofakeit.CreditCardExp() },
 	"cardtype":  func() interface{} { return gofakeit.CreditCardType() },
-	"seq":       Sequence,
-	"cardno":    CardNumber,
-	"uuid":      Uuid,
-	"urn":       Urn,
-	"card": Card,
+	"hkabb":     func() interface{} { return gofakeit.HackerAbbreviation() },
+	"hkadj":     func() interface{} { return gofakeit.HackerAdjective() },
+	"hknn":      func() interface{} { return gofakeit.HackerNoun() },
+	"hkvb":      func() interface{} { return gofakeit.HackerVerb() },
+	"hkph":      func() interface{} { return gofakeit.HackerPhrase() },
+	"noun":      func() interface{} { return gofakeit.Noun() },
+	"verb":      func() interface{} { return gofakeit.Verb() },
+	"adverb":    func() interface{} { return gofakeit.Adverb() },
+	"prep":      func() interface{} { return gofakeit.Preposition() },
+	"adj":       func() interface{} { return gofakeit.Adjective() },
+	"word":      func() interface{} { return gofakeit.Word() },
+	"liword":    func() interface{} { return gofakeit.LoremIpsumWord() },
+	"question":  func() interface{} { return gofakeit.Question() },
+	"quote":     func() interface{} { return gofakeit.Quote() },
+	"phrase":    func() interface{} { return gofakeit.Phrase() },
+
+	// Custom generators
+	"seq":    Sequence,
+	"cardno": CardNumber,
+	"uuid":   Uuid,
+	"urn":    Urn,
+	"card":   Card,
 }
 
-
-func Card() interface{} {
-	return map[string]string{
-		"number": gofakeit.CreditCard().Number,
-		"cvv": gofakeit.CreditCard().Cvv,
-		"type": gofakeit.CreditCard().Type,
-		"expiry": gofakeit.CreditCard().Exp,
-	}
-}
