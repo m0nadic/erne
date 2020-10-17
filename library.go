@@ -5,16 +5,16 @@ import (
 	"github.com/google/uuid"
 )
 
-func CardNumber() string {
+func CardNumber() interface{} {
 	return gofakeit.CreditCard().Number
 }
 
-func Urn() string {
+func Urn() interface{} {
 	guid, _ := uuid.NewUUID()
 	return guid.URN()
 }
 
-func Uuid() string {
+func Uuid() interface{} {
 	guid, _ := uuid.NewUUID()
 	return guid.String()
 }

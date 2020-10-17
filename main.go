@@ -21,7 +21,7 @@ func main() {
 }
 
 func generateRecord(args []string) {
-	m := make(map[string]string)
+	m := make(map[string]interface{})
 	for _, a := range args {
 
 		xs := strings.Split(a, "=")
