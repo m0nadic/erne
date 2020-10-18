@@ -5,7 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"github.com/brianvoe/gofakeit/v5"
-	"os"
 	"strings"
 )
 
@@ -16,9 +15,11 @@ func main() {
 
 	flag.Parse()
 
+	args := flag.Args()
 	gofakeit.Seed(0)
 	for i := 0; i < *count; i++ {
-		generateRecord(os.Args[1:])
+
+		generateRecord(args)
 	}
 }
 
