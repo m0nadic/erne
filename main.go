@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 )
+
 const arrayIndicator = "["
 
 func main() {
@@ -25,17 +26,10 @@ func generateRecord(args []string) {
 	m := make(map[string]interface{})
 	for _, a := range args {
 
-		xs := strings.Split(a, "=")
-		if len(xs) != 2 {
-			continue
-		}
-
-		key := xs[0]
-		value := xs[1]
+		key, value := splitKeyVal(a)
 
 		fn, ok := genMap[value]
 		if ok {
-
 			m[key] = fn()
 		} else {
 			m[key] = expand(value)
@@ -47,6 +41,19 @@ func generateRecord(args []string) {
 	fmt.Println(string(data))
 }
 
+func splitKeyVal(a string) (string, string) {
+	xs := strings.Split(a, "=")
+
+	switch len(a) {
+	case 0:
+		return "", ""
+	case 1:
+		return xs[0], ""
+	default:
+		return xs[0], xs[1]
+	}
+}
+
 func expand(value string) interface{} {
 	if strings.HasPrefix(value, arrayIndicator) {
 		return expandArray(value)
@@ -54,5 +61,3 @@ func expand(value string) interface{} {
 
 	return value
 }
-
-
