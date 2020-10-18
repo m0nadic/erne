@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 )
+const arrayIndicator = "["
 
 func main() {
 	count := flag.Int("n", 1, "number of records to generate")
@@ -28,10 +29,30 @@ func generateRecord(args []string) {
 		if len(xs) != 2 {
 			continue
 		}
-		fn := genMap[xs[1]]
-		m[xs[0]] = fn()
+
+		key := xs[0]
+		value := xs[1]
+
+		fn, ok := genMap[value]
+		if ok {
+
+			m[key] = fn()
+		} else {
+			m[key] = expand(value)
+		}
+
 	}
 
 	data, _ := json.MarshalIndent(&m, "", "    ")
 	fmt.Println(string(data))
 }
+
+func expand(value string) interface{} {
+	if strings.HasPrefix(value, arrayIndicator) {
+		return expandArray(value)
+	}
+
+	return value
+}
+
+
